@@ -29,21 +29,7 @@ session_start();
     </div>
   </header>
   <hr>
-  <div id="login-div"><h4 id="login"><?php
-		if(isset($_SESSION['nome_usu_sessao'])){
-			echo 'Olá '.$_SESSION['nome_usu_sessao'].
-			' tudo certo? Seja bem vindo!';
-	echo "<a href='../index.php?logout'>
-			Sair</a>";
-		}else{
-			echo "<a href='./login.php'>
-			Logar</a>";
-		}
-		if(isset($_GET['logout'])){
-			session_destroy();
-			header("Location: ../index.php");
-		}
-		?>
+  <div id="login-div"><h4 id="login"><?php $raiz = '../'; include __DIR__ . '/../includes/saudacao.php'; ?>
 </h4></div>
   <section>
     <article>
@@ -148,7 +134,7 @@ session_start();
           <fieldset class="bloco">
             <div class="dados">
               <label>Mensagem:</label>
-              <textarea name="msg" id="msg" rows="4" cols="30"> </textarea>
+              <textarea name="msg" id="msg" rows="4" cols="30" required></textarea>
             </div>
           </fieldset>
           <button type="submit" class="botao" name="submit">Enviar</button>
