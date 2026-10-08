@@ -1,23 +1,33 @@
 <?php
-	include('conexao.php');
-	$nome = $_POST['nome'];
-	$senha = $_POST['senha'];
-	$entrar = $_POST['entrar'];
-	
-	$criptografia = MD5($senha);
-	
-	if(isset($entrar)){
-		$verifica = mysqli_query($conn,"SELECT * FROM cadastro WHERE nome = '$nome' and senha = '$criptografia'")
-		or die("Erro ao buscar no banco");
-		if(mysqli_num_rows($verifica)<=0){
-		echo "<script language='javascript' type='text/javascript'>
-		alert('Usuário ou senha incorretos!');
-		window.location.href='login.php';
-		</script>";	
-		die();
-		}else{ session_start();
-		$_SESSION['nome_usu_sessao']= $nome;
-		header("Location: ../index.php");
-		}
-	}
-?>
+include('conexao.php');
+
+if (!isset($_POST['entrar'])) {
+	header('Location: login.php');
+	exit;
+}
+
+$nome = $_POST['nome'] ?? '';
+$senha = $_POST['senha'] ?? '';
+
+// Prepared statement: o valor digitado nunca é interpretado como SQL.
+$stmt = $conn->prepare('SELECT nome, senha FROM cadastro WHERE nome = ?');
+$stmt->bind_param('s', $nome);
+$stmt->execute();
+$usuario = $stmt->get_result()->fetch_assoc();
+$stmt->close();
+$conn->close();
+
+if ($usuario === null || !password_verify($senha, $usuario['senha'])) {
+	echo "<script>
+	alert('Usuário ou senha incorretos!');
+	window.location.href='login.php';
+	</script>";
+	exit;
+}
+
+session_start();
+// Gera um novo ID de sessão no login para evitar fixação de sessão.
+session_regenerate_id(true);
+$_SESSION['nome_usu_sessao'] = $usuario['nome'];
+header('Location: ../index.php');
+exit;
