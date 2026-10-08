@@ -148,7 +148,7 @@ session_start();
           <fieldset class="bloco">
             <div class="dados">
               <label>Mensagem:</label>
-              <textarea name="msg" id="msg" rows="4" cols="30"> </textarea>
+              <textarea name="msg" id="msg" rows="4" cols="30" required></textarea>
             </div>
           </fieldset>
           <button type="submit" class="botao" name="submit">Enviar</button>

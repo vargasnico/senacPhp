@@ -11,6 +11,15 @@ $telefone = $_POST['telefone'] ?? '';
 $modalidade = $_POST['modalidade'] ?? '';
 $cpf = $_POST['cpf'] ?? '';
 $assunto = $_POST['assunto'] ?? '';
+$msg = trim($_POST['msg'] ?? '');
+
+if ($email !== $confirmaemail) {
+	echo "<script>
+	alert('Os e-mails informados não conferem.');
+	history.back();
+	</script>";
+	exit;
+}
 
 $a = new Pessoa();
 $a->setnome($nome);
