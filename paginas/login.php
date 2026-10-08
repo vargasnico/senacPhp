@@ -30,21 +30,7 @@ session_start();
     </div>
   </header>
   <hr>
-  <div class="login-div"><h4 class="login"><?php
-		if(isset($_SESSION['nome_usu_sessao'])){
-			echo 'Olá '.$_SESSION['nome_usu_sessao'].
-			' tudo certo? Seja bem vindo!';
-	echo "<a href='../index.php?logout'>
-			Sair</a>";
-		}else{
-			echo "<a href='./login.php'>
-			Logar</a>";
-		}
-		if(isset($_GET['logout'])){
-			session_destroy();
-			header("Location: ../index.php");
-		}
-		?>
+  <div class="login-div"><h4 class="login"><?php $raiz = '../'; include __DIR__ . '/../includes/saudacao.php'; ?>
 </h4></div>
   <section>
     <article>
