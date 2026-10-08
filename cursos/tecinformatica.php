@@ -16,9 +16,9 @@
 	height="168" hspace="8"
 	title="Foto" align="left" />
 	<H1 align="center">
-	<a href="../index.html"><button class= btnindex>Início</button> </a>
-	<a href="../paginas/pagcursos.html"><button class= btnindex>Cursos </button> </a>
-	<a href="../paginas/paglocalizacao.html"><button class= btnindex > Localização </button></a>
+	<a href="../index.php"><button class= btnindex>Início</button> </a>
+	<a href="../paginas/pagcursos.php"><button class= btnindex>Cursos </button> </a>
+	<a href="../paginas/paglocalizacao.php"><button class= btnindex > Localização </button></a>
 	</H1>
     <HR />
     <br />
