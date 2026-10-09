@@ -1,49 +1,51 @@
-# Site Senac — PHP
+# Senac Website — PHP
 
-Site institucional de uma escola técnica, com páginas de cursos, cadastro e login de usuários e formulário de contato. Foi desenvolvido em 2024, nas aulas do curso técnico em Tecnologia da Informação do Senac Tech, com PHP, HTML, CSS e MySQL.
+Website for a technical school, with course pages, user registration and login, and a contact form. It was built in 2024 during the Information Technology technical course at Senac Tech, using PHP, HTML, CSS and MySQL.
 
-## Funcionalidades
+## Features
 
-- Páginas de apresentação da instituição, dos cursos técnicos e de localização
-- Cadastro de usuários e login com sessão
-- Formulário "Fale Conosco" com as mensagens salvas no banco
+- Pages presenting the school, its technical courses and location
+- User registration and session-based login
+- "Fale Conosco" (contact us) form with messages saved to the database
 
-## Revisão em 2026
+## 2026 review
 
-Já na graduação em Engenharia de Software, revisei o projeto e corrigi problemas que eu não conhecia quando o escrevi:
+Now a Software Engineering undergraduate, I revisited the project and fixed issues I wasn't aware of when I first wrote it:
 
-| Problema | Correção |
+| Issue | Fix |
 | --- | --- |
-| **SQL injection:** valores do formulário concatenados direto nas queries | Prepared statements em todas as consultas |
-| **Senhas com MD5**, um hash rápido e sem salt | `password_hash` / `password_verify` (bcrypt) |
-| **XSS:** nome do usuário impresso na página sem escape | `htmlspecialchars` na saudação |
-| Erros do banco exibiam a query SQL na página | Detalhes vão para o log do servidor |
-| A mensagem do "Fale Conosco" nunca era salva (variável não lida do formulário) | Campo lido e validado, e confirmação de e-mail checada |
-| Logout falhava: redirecionamento depois do HTML já enviado | `logout.php` dedicado |
-| Bloco de sessão copiado em 11 páginas | Um único include em `includes/saudacao.php` |
-| Páginas `.html` duplicando as `.php` e sem script do banco | Duplicatas removidas e `database/schema.sql` criado |
+| **SQL injection:** form values concatenated directly into queries | Prepared statements in every query |
+| **MD5 passwords**, a fast, unsalted hash | `password_hash` / `password_verify` (bcrypt) |
+| **XSS:** logged-in user's name printed without escaping | `htmlspecialchars` in the greeting |
+| Database errors displayed the SQL query on the page | Details go to the server log |
+| Contact form message was never saved (field never read from the form) | Field read and validated, and email confirmation checked |
+| Logout failed: redirect sent after the HTML had already been output | Dedicated `logout.php` |
+| Session block copied across 11 pages | A single include in `includes/saudacao.php` |
+| `.html` pages duplicating the `.php` ones, and no database script | Duplicates removed and `database/schema.sql` added |
 
-Cada correção está em um commit separado, para facilitar a leitura do histórico.
+Each fix is in a separate commit, to keep the history easy to follow.
 
-## Como rodar
+## Running
 
-Com [Docker](https://www.docker.com/):
+With [Docker](https://www.docker.com/):
 
 ```sh
 docker compose up --build
 ```
 
-O site fica em http://localhost:8080. O banco é criado automaticamente a partir de `database/schema.sql`.
+The site runs at http://localhost:8080, and the database is created automatically from `database/schema.sql`.
 
-Também funciona no XAMPP: copie a pasta para `htdocs` e importe `database/schema.sql` no phpMyAdmin.
+It also works with XAMPP: copy the folder into `htdocs` and import `database/schema.sql` in phpMyAdmin.
 
-## Estrutura
+## Structure
 
-| Caminho | Conteúdo |
+| Path | Contents |
 | --- | --- |
-| `index.php` | Página inicial |
-| `paginas/` | Páginas do site, formulários e scripts que processam cadastro, login e contato |
-| `cursos/` | Páginas de detalhe dos cursos técnicos |
-| `includes/` | Trechos compartilhados entre as páginas |
-| `database/schema.sql` | Criação do banco e das tabelas |
-| `css/`, `imagens/` | Estilos e imagens |
+| `index.php` | Home page |
+| `paginas/` | Site pages, forms, and the scripts that handle registration, login and contact |
+| `cursos/` | Technical course detail pages |
+| `includes/` | Snippets shared across pages |
+| `database/schema.sql` | Database and table creation |
+| `css/`, `imagens/` | Styles and images |
+
+The site content and code are in Portuguese.
